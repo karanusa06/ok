@@ -1,0 +1,50 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+.venv/
+
+# Ignore logs and temp files
+*.log
+*.tmp
+
+# Ignore OS system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore editor and IDE folders
+.vscode/
+.idea/
+
+# Ignore Node-related files (if not using npm)
+node_modules/
+package-lock.json
+
+# Ignore sensitive environment files
+.env
+
+# Ignore backup and zip archives
+*.bak
+*.zip
+*.rar
+*.7z
+
+# Ignore build and distribution folders
+build/
+dist/
+*.egg-info/
+
+# Ignore test cache
+.pytest_cache/
+__snapshots__/
+
+# Ignore Git & Render-specific cache
+.gitignore~
+*.swp
+*.swo

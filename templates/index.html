@@ -1,0 +1,3205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karan Usa Emote Bot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="static/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f5f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e04a8a;
+      font-size: 2.4em;
+      text-shadow: 0 2px 3px rgba(0,0,0,0.2);
+      border-bottom: 3px solid #e04a8a;
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    .developer {
+      text-align: center;
+      font-weight: 600;
+      color: #ff3333;
+      margin-top: -5px;
+    }
+
+    .social-links {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .social-links a.discord { background: #5865f2; }
+    .social-links a.telegram { background: #0088cc; }
+    .social-links a.youtube { background: #ff0000; }
+    .social-links a:hover { opacity: 0.85; }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .monitor-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: left;
+      margin-bottom: 20px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .input-section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .uid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .result-display {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    #result-box {
+      background: #2d3748;
+      color: #e2e8f0;
+      border-radius: 6px;
+      padding: 15px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .emote-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .emote-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+      padding: 15px;
+    }
+
+    .emote-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .send-button {
+      background-color: #569eeb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      font-weight: 600;
+    }
+
+    .send-button:hover {
+      background-color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome To KARAN USA</h1>
+    <p class="developer">Developer – <strong>Mankaran Mahal</strong></p>
+
+    <div class="social-links">
+      <a href="https://discord.gg/GN3fTd5kB2" class="discord" target="_blank"><i class="fab fa-discord"></i> Join Discord</a>
+      <a href="#" class="telegram"><i class="fab fa-telegram"></i> Join Telegram</a>
+      <a href="#" class="youtube"><i class="fab fa-youtube"></i> Subscribe YouTube</a>
+    </div>
+
+    <div class="monitor-box">User Monitoring: 174/1000</div>
+
+    <div class="input-section">
+      <div class="input-group">
+        <label for="server"><i class="fas fa-server"></i> Server:</label>
+        <select id="server">
+          <option value="india">India Server</option>
+          <option value="usa">United States</option>
+          <option value="northafrica">North Africa</option>
+          <option value="pakistan">Pakistan</option>
+          <option value="brazil">Brazil</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="team-code"><i class="fas fa-users"></i> Team Code:</label>
+        <input type="text" id="team-code" placeholder="Enter team code">
+      </div>
+
+      <div class="uid-grid">
+        <div class="input-group"><label><i class="fas fa-user"></i> UID 1:</label><input type="text" class="uid-input" placeholder="Required"></div>
+        <div class="input-group"><label><i class="fas fa-user"></i> UID 2:</label><input type="text" class="uid-input" placeholder="Optional"></div>
+        <div class="input-group"><label><i class="fas fa-user"></i> UID 3:</label><input type="text" class="uid-input" placeholder="Optional"></div>
+        <div class="input-group"><label><i class="fas fa-user"></i> UID 4:</label><input type="text" class="uid-input" placeholder="Optional"></div>
+      </div>
+    </div>
+
+    <div class="result-display">
+      <h3>Result:</h3>
+      <pre id="result-box">Ready. Fill in the details and send an emote.</pre>
+    </div>
+
+    <!-- ✅ Emote Grid -->
+    <section class="emote-list">
+      <div class="emote-item">
+        <img src="static/images/909000075.png" alt="Cobra Rising" />
+        <p class="emote-name">Cobra Rising</p>
+        <p class="emote-id">ID: 909000075</p>
+        <button class="send-button" data-emote-id="909000075">send</button>
+      </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000063.png" alt="Ak Max">
+                <div class="emote-details">
+                    <p class="emote-name">Ak Max</p>
+                    <p class="emote-id">ID: 909000063</p>
+                </div>
+                <button class="send-button" data-emote-id="909000063">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035007.png" alt="Shotgun Max">
+                <div class="emote-details">
+                    <p class="emote-name">Shotgun Max</p>
+                    <p class="emote-id">ID: 909035007</p>
+                </div>
+                <button class="send-button" data-emote-id="909035007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000068.png" alt="Scar Max">
+                <div class="emote-details">
+                    <p class="emote-name">Scar Max</p>
+                    <p class="emote-id">ID: 909000068</p>
+                </div>
+                <button class="send-button" data-emote-id="909000068">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000085.png" alt="XM8 Max">
+                <div class="emote-details">
+                    <p class="emote-name">XM8 Max</p>
+                    <p class="emote-id">ID: 909000085</p>
+                </div>
+                <button class="send-button" data-emote-id="909000085">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000081.png" alt="M10 Max">
+                <div class="emote-details">
+                    <p class="emote-name">M10 Max</p>
+                    <p class="emote-id">ID: 909000081</p>
+                </div>
+                <button class="send-button" data-emote-id="909000081">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000090.png" alt="Famasa Max">
+                <div class="emote-details">
+                    <p class="emote-name">Famasa Max</p>
+                    <p class="emote-id">ID: 909000090</p>
+                </div>
+                <button class="send-button" data-emote-id="909000090">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000098.png" alt="UMP Max">
+                <div class="emote-details">
+                    <p class="emote-name">UMP Max</p>
+                    <p class="emote-id">ID: 909000098</p>
+                </div>
+                <button class="send-button" data-emote-id="909000098">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040010.png" alt="New M40 Max">
+                <div class="emote-details">
+                    <p class="emote-name">New M40 Max</p>
+                    <p class="emote-id">ID: 909040010</p>
+                </div>
+                <button class="send-button" data-emote-id="909040010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045001.png" alt="Parafal Max">
+                <div class="emote-details">
+                    <p class="emote-name">Parafal Max</p>
+                    <p class="emote-id">ID: 909045001</p>
+                </div>
+                <button class="send-button" data-emote-id="909045001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042008.png" alt="WD Picker Max">
+                <div class="emote-details">
+                    <p class="emote-name">WD Picker Max</p>
+                    <p class="emote-id">ID: 909042008</p>
+                </div>
+                <button class="send-button" data-emote-id="909042008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049012.png" alt="Open Fire">
+                <div class="emote-details">
+                    <p class="emote-name">Open Fire</p>
+                    <p class="emote-id">ID: 909049012</p>
+                </div>
+                <button class="send-button" data-emote-id="909049012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042007.png" alt="&#34;100&#34; Gloo Sculpture">
+                <div class="emote-details">
+                    <p class="emote-name">&#34;100&#34; Gloo Sculpture</p>
+                    <p class="emote-id">ID: 909042007</p>
+                </div>
+                <button class="send-button" data-emote-id="909042007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000002.png" alt="LOL">
+                <div class="emote-details">
+                    <p class="emote-name">LOL</p>
+                    <p class="emote-id">ID: 909000002</p>
+                </div>
+                <button class="send-button" data-emote-id="909000002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000010.png" alt="Flowers of Love">
+                <div class="emote-details">
+                    <p class="emote-name">Flowers of Love</p>
+                    <p class="emote-id">ID: 909000010</p>
+                </div>
+                <button class="send-button" data-emote-id="909000010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000014.png" alt="FFWC Throne">
+                <div class="emote-details">
+                    <p class="emote-name">FFWC Throne</p>
+                    <p class="emote-id">ID: 909000014</p>
+                </div>
+                <button class="send-button" data-emote-id="909000014">sendpy main.py</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000032.png" alt="Selfie">
+                <div class="emote-details">
+                    <p class="emote-name">Selfie</p>
+                    <p class="emote-id">ID: 909000032</p>
+                </div>
+                <button class="send-button" data-emote-id="909000032">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000034.png" alt="Pirate&#39;s Flag">
+                <div class="emote-details">
+                    <p class="emote-name">Pirate&#39;s Flag</p>
+                    <p class="emote-id">ID: 909000034</p>
+                </div>
+                <button class="send-button" data-emote-id="909000034">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000036.png" alt="Top DJ">
+                <div class="emote-details">
+                    <p class="emote-name">Top DJ</p>
+                    <p class="emote-id">ID: 909000036</p>
+                </div>
+                <button class="send-button" data-emote-id="909000036">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000038.png" alt="Power of money">
+                <div class="emote-details">
+                    <p class="emote-name">Power of money</p>
+                    <p class="emote-id">ID: 909000038</p>
+                </div>
+                <button class="send-button" data-emote-id="909000038">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000039.png" alt="Eat my dust">
+                <div class="emote-details">
+                    <p class="emote-name">Eat my dust</p>
+                    <p class="emote-id">ID: 909000039</p>
+                </div>
+                <button class="send-button" data-emote-id="909000039">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000041.png" alt="Kongfu">
+                <div class="emote-details">
+                    <p class="emote-name">Kongfu</p>
+                    <p class="emote-id">ID: 909000041</p>
+                </div>
+                <button class="send-button" data-emote-id="909000041">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000045.png" alt="I heart you">
+                <div class="emote-details">
+                    <p class="emote-name">I heart you</p>
+                    <p class="emote-id">ID: 909000045</p>
+                </div>
+                <button class="send-button" data-emote-id="909000045">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000046.png" alt="Tea Time">
+                <div class="emote-details">
+                    <p class="emote-name">Tea Time</p>
+                    <p class="emote-id">ID: 909000046</p>
+                </div>
+                <button class="send-button" data-emote-id="909000046">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000052.png" alt="Doggie">
+                <div class="emote-details">
+                    <p class="emote-name">Doggie</p>
+                    <p class="emote-id">ID: 909000052</p>
+                </div>
+                <button class="send-button" data-emote-id="909000052">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000055.png" alt="I&#39;m Rich!">
+                <div class="emote-details">
+                    <p class="emote-name">I&#39;m Rich!</p>
+                    <p class="emote-id">ID: 909000055</p>
+                </div>
+                <button class="send-button" data-emote-id="909000055">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000056.png" alt="Make It Rain">
+                <div class="emote-details">
+                    <p class="emote-name">Make It Rain</p>
+                    <p class="emote-id">ID: 909000056</p>
+                </div>
+                <button class="send-button" data-emote-id="909000056">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000057.png" alt="Dust Off">
+                <div class="emote-details">
+                    <p class="emote-name">Dust Off</p>
+                    <p class="emote-id">ID: 909000057</p>
+                </div>
+                <button class="send-button" data-emote-id="909000057">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000058.png" alt="Captain Booyah">
+                <div class="emote-details">
+                    <p class="emote-name">Captain Booyah</p>
+                    <p class="emote-id">ID: 909000058</p>
+                </div>
+                <button class="send-button" data-emote-id="909000058">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000060.png" alt="BOOYAH!">
+                <div class="emote-details">
+                    <p class="emote-name">BOOYAH!</p>
+                    <p class="emote-id">ID: 909000060</p>
+                </div>
+                <button class="send-button" data-emote-id="909000060">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000061.png" alt="Bhangra">
+                <div class="emote-details">
+                    <p class="emote-name">Bhangra</p>
+                    <p class="emote-id">ID: 909000061</p>
+                </div>
+                <button class="send-button" data-emote-id="909000061">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000062.png" alt="Piece of Cake">
+                <div class="emote-details">
+                    <p class="emote-name">Piece of Cake</p>
+                    <p class="emote-id">ID: 909000062</p>
+                </div>
+                <button class="send-button" data-emote-id="909000062">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000064.png" alt="I&#39;m Saitama!">
+                <div class="emote-details">
+                    <p class="emote-name">I&#39;m Saitama!</p>
+                    <p class="emote-id">ID: 909000064</p>
+                </div>
+                <button class="send-button" data-emote-id="909000064">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000065.png" alt="The Victor">
+                <div class="emote-details">
+                    <p class="emote-name">The Victor</p>
+                    <p class="emote-id">ID: 909000065</p>
+                </div>
+                <button class="send-button" data-emote-id="909000065">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000066.png" alt="Sii!">
+                <div class="emote-details">
+                    <p class="emote-name">Sii!</p>
+                    <p class="emote-id">ID: 909000066</p>
+                </div>
+                <button class="send-button" data-emote-id="909000066">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000067.png" alt="Obliteration">
+                <div class="emote-details">
+                    <p class="emote-name">Obliteration</p>
+                    <p class="emote-id">ID: 909000067</p>
+                </div>
+                <button class="send-button" data-emote-id="909000067">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000069.png" alt="Top Scorer">
+                <div class="emote-details">
+                    <p class="emote-name">Top Scorer</p>
+                    <p class="emote-id">ID: 909000069</p>
+                </div>
+                <button class="send-button" data-emote-id="909000069">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000070.png" alt="Triple Kicks">
+                <div class="emote-details">
+                    <p class="emote-name">Triple Kicks</p>
+                    <p class="emote-id">ID: 909000070</p>
+                </div>
+                <button class="send-button" data-emote-id="909000070">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000071.png" alt="Cobra Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Cobra Dance</p>
+                    <p class="emote-id">ID: 909000071</p>
+                </div>
+                <button class="send-button" data-emote-id="909000071">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000072.png" alt="Predator Pulse">
+                <div class="emote-details">
+                    <p class="emote-name">Predator Pulse</p>
+                    <p class="emote-id">ID: 909000072</p>
+                </div>
+                <button class="send-button" data-emote-id="909000072">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000073.png" alt="Ground Punch">
+                <div class="emote-details">
+                    <p class="emote-name">Ground Punch</p>
+                    <p class="emote-id">ID: 909000073</p>
+                </div>
+                <button class="send-button" data-emote-id="909000073">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000074.png" alt="The Biker">
+                <div class="emote-details">
+                    <p class="emote-name">The Biker</p>
+                    <p class="emote-id">ID: 909000074</p>
+                </div>
+                <button class="send-button" data-emote-id="909000074">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000076.png" alt="One-Finger Pushup">
+                <div class="emote-details">
+                    <p class="emote-name">One-Finger Pushup</p>
+                    <p class="emote-id">ID: 909000076</p>
+                </div>
+                <button class="send-button" data-emote-id="909000076">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000077.png" alt="Stage Time">
+                <div class="emote-details">
+                    <p class="emote-name">Stage Time</p>
+                    <p class="emote-id">ID: 909000077</p>
+                </div>
+                <button class="send-button" data-emote-id="909000077">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000078.png" alt="Booyah! Balloon">
+                <div class="emote-details">
+                    <p class="emote-name">Booyah! Balloon</p>
+                    <p class="emote-id">ID: 909000078</p>
+                </div>
+                <button class="send-button" data-emote-id="909000078">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000079.png" alt="More Practice">
+                <div class="emote-details">
+                    <p class="emote-name">More Practice</p>
+                    <p class="emote-id">ID: 909000079</p>
+                </div>
+                <button class="send-button" data-emote-id="909000079">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000080.png" alt="FFWS 2021">
+                <div class="emote-details">
+                    <p class="emote-name">FFWS 2021</p>
+                    <p class="emote-id">ID: 909000080</p>
+                </div>
+                <button class="send-button" data-emote-id="909000080">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000086.png" alt="Mythos Four">
+                <div class="emote-details">
+                    <p class="emote-name">Mythos Four</p>
+                    <p class="emote-id">ID: 909000086</p>
+                </div>
+                <button class="send-button" data-emote-id="909000086">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000087.png" alt="Champion Grab">
+                <div class="emote-details">
+                    <p class="emote-name">Champion Grab</p>
+                    <p class="emote-id">ID: 909000087</p>
+                </div>
+                <button class="send-button" data-emote-id="909000087">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000088.png" alt="Win and Chill">
+                <div class="emote-details">
+                    <p class="emote-name">Win and Chill</p>
+                    <p class="emote-id">ID: 909000088</p>
+                </div>
+                <button class="send-button" data-emote-id="909000088">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000089.png" alt="Hadouken">
+                <div class="emote-details">
+                    <p class="emote-name">Hadouken</p>
+                    <p class="emote-id">ID: 909000089</p>
+                </div>
+                <button class="send-button" data-emote-id="909000089">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000091.png" alt="Big Smash">
+                <div class="emote-details">
+                    <p class="emote-name">Big Smash</p>
+                    <p class="emote-id">ID: 909000091</p>
+                </div>
+                <button class="send-button" data-emote-id="909000091">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000093.png" alt="All In Control">
+                <div class="emote-details">
+                    <p class="emote-name">All In Control</p>
+                    <p class="emote-id">ID: 909000093</p>
+                </div>
+                <button class="send-button" data-emote-id="909000093">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000094.png" alt="Debugging">
+                <div class="emote-details">
+                    <p class="emote-name">Debugging</p>
+                    <p class="emote-id">ID: 909000094</p>
+                </div>
+                <button class="send-button" data-emote-id="909000094">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000095.png" alt="Waggor Wave">
+                <div class="emote-details">
+                    <p class="emote-name">Waggor Wave</p>
+                    <p class="emote-id">ID: 909000095</p>
+                </div>
+                <button class="send-button" data-emote-id="909000095">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000096.png" alt="Crazy Guitar">
+                <div class="emote-details">
+                    <p class="emote-name">Crazy Guitar</p>
+                    <p class="emote-id">ID: 909000096</p>
+                </div>
+                <button class="send-button" data-emote-id="909000096">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000121.png" alt="Dribble King">
+                <div class="emote-details">
+                    <p class="emote-name">Dribble King</p>
+                    <p class="emote-id">ID: 909000121</p>
+                </div>
+                <button class="send-button" data-emote-id="909000121">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000122.png" alt="Name Not Found">
+                <div class="emote-details">
+                    <p class="emote-name">Name Not Found</p>
+                    <p class="emote-id">ID: 909000122</p>
+                </div>
+                <button class="send-button" data-emote-id="909000122">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000123.png" alt="Mind it!">
+                <div class="emote-details">
+                    <p class="emote-name">Mind it!</p>
+                    <p class="emote-id">ID: 909000123</p>
+                </div>
+                <button class="send-button" data-emote-id="909000123">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000124.png" alt="Golden Combo">
+                <div class="emote-details">
+                    <p class="emote-name">Golden Combo</p>
+                    <p class="emote-id">ID: 909000124</p>
+                </div>
+                <button class="send-button" data-emote-id="909000124">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000125.png" alt="Sick Moves">
+                <div class="emote-details">
+                    <p class="emote-name">Sick Moves</p>
+                    <p class="emote-id">ID: 909000125</p>
+                </div>
+                <button class="send-button" data-emote-id="909000125">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000128.png" alt="Ruler&#39;s Flag">
+                <div class="emote-details">
+                    <p class="emote-name">Ruler&#39;s Flag</p>
+                    <p class="emote-id">ID: 909000128</p>
+                </div>
+                <button class="send-button" data-emote-id="909000128">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000129.png" alt="Money Throw">
+                <div class="emote-details">
+                    <p class="emote-name">Money Throw</p>
+                    <p class="emote-id">ID: 909000129</p>
+                </div>
+                <button class="send-button" data-emote-id="909000129">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000130.png" alt="Endless Bullets">
+                <div class="emote-details">
+                    <p class="emote-name">Endless Bullets</p>
+                    <p class="emote-id">ID: 909000130</p>
+                </div>
+                <button class="send-button" data-emote-id="909000130">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000133.png" alt="Fire Slam">
+                <div class="emote-details">
+                    <p class="emote-name">Fire Slam</p>
+                    <p class="emote-id">ID: 909000133</p>
+                </div>
+                <button class="send-button" data-emote-id="909000133">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000134.png" alt="Heartbroken">
+                <div class="emote-details">
+                    <p class="emote-name">Heartbroken</p>
+                    <p class="emote-id">ID: 909000134</p>
+                </div>
+                <button class="send-button" data-emote-id="909000134">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000135.png" alt="Rock Paper Scissors">
+                <div class="emote-details">
+                    <p class="emote-name">Rock Paper Scissors</p>
+                    <p class="emote-id">ID: 909000135</p>
+                </div>
+                <button class="send-button" data-emote-id="909000135">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000136.png" alt="Shattered Reality">
+                <div class="emote-details">
+                    <p class="emote-name">Shattered Reality</p>
+                    <p class="emote-id">ID: 909000136</p>
+                </div>
+                <button class="send-button" data-emote-id="909000136">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000137.png" alt="Halo of Music">
+                <div class="emote-details">
+                    <p class="emote-name">Halo of Music</p>
+                    <p class="emote-id">ID: 909000137</p>
+                </div>
+                <button class="send-button" data-emote-id="909000137">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000138.png" alt="Burnt BBQ">
+                <div class="emote-details">
+                    <p class="emote-name">Burnt BBQ</p>
+                    <p class="emote-id">ID: 909000138</p>
+                </div>
+                <button class="send-button" data-emote-id="909000138">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000139.png" alt="Switching Steps">
+                <div class="emote-details">
+                    <p class="emote-name">Switching Steps</p>
+                    <p class="emote-id">ID: 909000139</p>
+                </div>
+                <button class="send-button" data-emote-id="909000139">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000140.png" alt="Creed Slay">
+                <div class="emote-details">
+                    <p class="emote-name">Creed Slay</p>
+                    <p class="emote-id">ID: 909000140</p>
+                </div>
+                <button class="send-button" data-emote-id="909000140">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000141.png" alt="Leap of Fail">
+                <div class="emote-details">
+                    <p class="emote-name">Leap of Fail</p>
+                    <p class="emote-id">ID: 909000141</p>
+                </div>
+                <button class="send-button" data-emote-id="909000141">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000142.png" alt="Name Not Found">
+                <div class="emote-details">
+                    <p class="emote-name">Name Not Found</p>
+                    <p class="emote-id">ID: 909000142</p>
+                </div>
+                <button class="send-button" data-emote-id="909000142">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000143.png" alt="Helicopter Shot">
+                <div class="emote-details">
+                    <p class="emote-name">Helicopter Shot</p>
+                    <p class="emote-id">ID: 909000143</p>
+                </div>
+                <button class="send-button" data-emote-id="909000143">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000144.png" alt="Kungfu Tigers">
+                <div class="emote-details">
+                    <p class="emote-name">Kungfu Tigers</p>
+                    <p class="emote-id">ID: 909000144</p>
+                </div>
+                <button class="send-button" data-emote-id="909000144">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909000145.png" alt="Possessed Warrior">
+                <div class="emote-details">
+                    <p class="emote-name">Possessed Warrior</p>
+                    <p class="emote-id">ID: 909000145</p>
+                </div>
+                <button class="send-button" data-emote-id="909000145">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033001.png" alt="Fireborn">
+                <div class="emote-details">
+                    <p class="emote-name">Fireborn</p>
+                    <p class="emote-id">ID: 909033001</p>
+                </div>
+                <button class="send-button" data-emote-id="909033001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033002.png" alt="Golden Feather">
+                <div class="emote-details">
+                    <p class="emote-name">Golden Feather</p>
+                    <p class="emote-id">ID: 909033002</p>
+                </div>
+                <button class="send-button" data-emote-id="909033002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033004.png" alt="Drop Kick">
+                <div class="emote-details">
+                    <p class="emote-name">Drop Kick</p>
+                    <p class="emote-id">ID: 909033004</p>
+                </div>
+                <button class="send-button" data-emote-id="909033004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033005.png" alt="Sit Down!">
+                <div class="emote-details">
+                    <p class="emote-name">Sit Down!</p>
+                    <p class="emote-id">ID: 909033005</p>
+                </div>
+                <button class="send-button" data-emote-id="909033005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033006.png" alt="BOOYAH Sparks">
+                <div class="emote-details">
+                    <p class="emote-name">BOOYAH Sparks</p>
+                    <p class="emote-id">ID: 909033006</p>
+                </div>
+                <button class="send-button" data-emote-id="909033006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033007.png" alt="The FFWS Dance">
+                <div class="emote-details">
+                    <p class="emote-name">The FFWS Dance</p>
+                    <p class="emote-id">ID: 909033007</p>
+                </div>
+                <button class="send-button" data-emote-id="909033007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033008.png" alt="Easy Peasy">
+                <div class="emote-details">
+                    <p class="emote-name">Easy Peasy</p>
+                    <p class="emote-id">ID: 909033008</p>
+                </div>
+                <button class="send-button" data-emote-id="909033008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033009.png" alt="Winner Throw">
+                <div class="emote-details">
+                    <p class="emote-name">Winner Throw</p>
+                    <p class="emote-id">ID: 909033009</p>
+                </div>
+                <button class="send-button" data-emote-id="909033009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909033010.png" alt="Weight of Victory">
+                <div class="emote-details">
+                    <p class="emote-name">Weight of Victory</p>
+                    <p class="emote-id">ID: 909033010</p>
+                </div>
+                <button class="send-button" data-emote-id="909033010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034001.png" alt="Chronicle of the Sword">
+                <div class="emote-details">
+                    <p class="emote-name">Chronicle of the Sword</p>
+                    <p class="emote-id">ID: 909034001</p>
+                </div>
+                <button class="send-button" data-emote-id="909034001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034002.png" alt="The Collapse">
+                <div class="emote-details">
+                    <p class="emote-name">The Collapse</p>
+                    <p class="emote-id">ID: 909034002</p>
+                </div>
+                <button class="send-button" data-emote-id="909034002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034003.png" alt="Flaming Groove">
+                <div class="emote-details">
+                    <p class="emote-name">Flaming Groove</p>
+                    <p class="emote-id">ID: 909034003</p>
+                </div>
+                <button class="send-button" data-emote-id="909034003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034004.png" alt="Energetic">
+                <div class="emote-details">
+                    <p class="emote-name">Energetic</p>
+                    <p class="emote-id">ID: 909034004</p>
+                </div>
+                <button class="send-button" data-emote-id="909034004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034005.png" alt="Ridicule">
+                <div class="emote-details">
+                    <p class="emote-name">Ridicule</p>
+                    <p class="emote-id">ID: 909034005</p>
+                </div>
+                <button class="send-button" data-emote-id="909034005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034006.png" alt="Tease Waggor">
+                <div class="emote-details">
+                    <p class="emote-name">Tease Waggor</p>
+                    <p class="emote-id">ID: 909034006</p>
+                </div>
+                <button class="send-button" data-emote-id="909034006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034007.png" alt="Great Conductor">
+                <div class="emote-details">
+                    <p class="emote-name">Great Conductor</p>
+                    <p class="emote-id">ID: 909034007</p>
+                </div>
+                <button class="send-button" data-emote-id="909034007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034008.png" alt="Fake Death">
+                <div class="emote-details">
+                    <p class="emote-name">Fake Death</p>
+                    <p class="emote-id">ID: 909034008</p>
+                </div>
+                <button class="send-button" data-emote-id="909034008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034009.png" alt="Twerk">
+                <div class="emote-details">
+                    <p class="emote-name">Twerk</p>
+                    <p class="emote-id">ID: 909034009</p>
+                </div>
+                <button class="send-button" data-emote-id="909034009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034010.png" alt="BR-Ranked Heroic Emote">
+                <div class="emote-details">
+                    <p class="emote-name">BR-Ranked Heroic Emote</p>
+                    <p class="emote-id">ID: 909034010</p>
+                </div>
+                <button class="send-button" data-emote-id="909034010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034011.png" alt="BR-Ranked Master Emote">
+                <div class="emote-details">
+                    <p class="emote-name">BR-Ranked Master Emote</p>
+                    <p class="emote-id">ID: 909034011</p>
+                </div>
+                <button class="send-button" data-emote-id="909034011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034012.png" alt="CS-Ranked Heroic Emote">
+                <div class="emote-details">
+                    <p class="emote-name">CS-Ranked Heroic Emote</p>
+                    <p class="emote-id">ID: 909034012</p>
+                </div>
+                <button class="send-button" data-emote-id="909034012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034013.png" alt="CS-Ranked Master Emote">
+                <div class="emote-details">
+                    <p class="emote-name">CS-Ranked Master Emote</p>
+                    <p class="emote-id">ID: 909034013</p>
+                </div>
+                <button class="send-button" data-emote-id="909034013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909034014.png" alt="Yes, I do">
+                <div class="emote-details">
+                    <p class="emote-name">Yes, I do</p>
+                    <p class="emote-id">ID: 909034014</p>
+                </div>
+                <button class="send-button" data-emote-id="909034014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035001.png" alt="Free Money!">
+                <div class="emote-details">
+                    <p class="emote-name">Free Money!</p>
+                    <p class="emote-id">ID: 909035001</p>
+                </div>
+                <button class="send-button" data-emote-id="909035001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035005.png" alt="Victorious Eagle">
+                <div class="emote-details">
+                    <p class="emote-name">Victorious Eagle</p>
+                    <p class="emote-id">ID: 909035005</p>
+                </div>
+                <button class="send-button" data-emote-id="909035005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035006.png" alt="Flying Saucer">
+                <div class="emote-details">
+                    <p class="emote-name">Flying Saucer</p>
+                    <p class="emote-id">ID: 909035006</p>
+                </div>
+                <button class="send-button" data-emote-id="909035006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035008.png" alt="Bobble Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Bobble Dance</p>
+                    <p class="emote-id">ID: 909035008</p>
+                </div>
+                <button class="send-button" data-emote-id="909035008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035009.png" alt="Weight Training">
+                <div class="emote-details">
+                    <p class="emote-name">Weight Training</p>
+                    <p class="emote-id">ID: 909035009</p>
+                </div>
+                <button class="send-button" data-emote-id="909035009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035010.png" alt="Beautiful Love">
+                <div class="emote-details">
+                    <p class="emote-name">Beautiful Love</p>
+                    <p class="emote-id">ID: 909035010</p>
+                </div>
+                <button class="send-button" data-emote-id="909035010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035011.png" alt="Groove Moves">
+                <div class="emote-details">
+                    <p class="emote-name">Groove Moves</p>
+                    <p class="emote-id">ID: 909035011</p>
+                </div>
+                <button class="send-button" data-emote-id="909035011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035012.png" alt="Howler&#39;s Rage">
+                <div class="emote-details">
+                    <p class="emote-name">Howler&#39;s Rage</p>
+                    <p class="emote-id">ID: 909035012</p>
+                </div>
+                <button class="send-button" data-emote-id="909035012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035013.png" alt="Louder Please">
+                <div class="emote-details">
+                    <p class="emote-name">Louder Please</p>
+                    <p class="emote-id">ID: 909035013</p>
+                </div>
+                <button class="send-button" data-emote-id="909035013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035014.png" alt="Ninja Stand">
+                <div class="emote-details">
+                    <p class="emote-name">Ninja Stand</p>
+                    <p class="emote-id">ID: 909035014</p>
+                </div>
+                <button class="send-button" data-emote-id="909035014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909035015.png" alt="Creator In Action">
+                <div class="emote-details">
+                    <p class="emote-name">Creator In Action</p>
+                    <p class="emote-id">ID: 909035015</p>
+                </div>
+                <button class="send-button" data-emote-id="909035015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036001.png" alt="Ghost Float">
+                <div class="emote-details">
+                    <p class="emote-name">Ghost Float</p>
+                    <p class="emote-id">ID: 909036001</p>
+                </div>
+                <button class="send-button" data-emote-id="909036001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036002.png" alt="Shiba Surf">
+                <div class="emote-details">
+                    <p class="emote-name">Shiba Surf</p>
+                    <p class="emote-id">ID: 909036002</p>
+                </div>
+                <button class="send-button" data-emote-id="909036002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036003.png" alt="Waiter Walk">
+                <div class="emote-details">
+                    <p class="emote-name">Waiter Walk</p>
+                    <p class="emote-id">ID: 909036003</p>
+                </div>
+                <button class="send-button" data-emote-id="909036003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036004.png" alt="Graffiti Cameraman">
+                <div class="emote-details">
+                    <p class="emote-name">Graffiti Cameraman</p>
+                    <p class="emote-id">ID: 909036004</p>
+                </div>
+                <button class="send-button" data-emote-id="909036004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036005.png" alt="Agile Boxer">
+                <div class="emote-details">
+                    <p class="emote-name">Agile Boxer</p>
+                    <p class="emote-id">ID: 909036005</p>
+                </div>
+                <button class="send-button" data-emote-id="909036005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036006.png" alt="Sunbathing">
+                <div class="emote-details">
+                    <p class="emote-name">Sunbathing</p>
+                    <p class="emote-id">ID: 909036006</p>
+                </div>
+                <button class="send-button" data-emote-id="909036006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036008.png" alt="Skateboard Swag">
+                <div class="emote-details">
+                    <p class="emote-name">Skateboard Swag</p>
+                    <p class="emote-id">ID: 909036008</p>
+                </div>
+                <button class="send-button" data-emote-id="909036008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036009.png" alt="Phantom Tamer">
+                <div class="emote-details">
+                    <p class="emote-name">Phantom Tamer</p>
+                    <p class="emote-id">ID: 909036009</p>
+                </div>
+                <button class="send-button" data-emote-id="909036009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036010.png" alt="The Signal">
+                <div class="emote-details">
+                    <p class="emote-name">The Signal</p>
+                    <p class="emote-id">ID: 909036010</p>
+                </div>
+                <button class="send-button" data-emote-id="909036010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036011.png" alt="Eternal Descent">
+                <div class="emote-details">
+                    <p class="emote-name">Eternal Descent</p>
+                    <p class="emote-id">ID: 909036011</p>
+                </div>
+                <button class="send-button" data-emote-id="909036011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036012.png" alt="Swaggy Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Swaggy Dance</p>
+                    <p class="emote-id">ID: 909036012</p>
+                </div>
+                <button class="send-button" data-emote-id="909036012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909036014.png" alt="Admire">
+                <div class="emote-details">
+                    <p class="emote-name">Admire</p>
+                    <p class="emote-id">ID: 909036014</p>
+                </div>
+                <button class="send-button" data-emote-id="909036014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037001.png" alt="Reindeer Float">
+                <div class="emote-details">
+                    <p class="emote-name">Reindeer Float</p>
+                    <p class="emote-id">ID: 909037001</p>
+                </div>
+                <button class="send-button" data-emote-id="909037001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037002.png" alt="Bamboo Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Bamboo Dance</p>
+                    <p class="emote-id">ID: 909037002</p>
+                </div>
+                <button class="send-button" data-emote-id="909037002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037003.png" alt="Dance of Constellation">
+                <div class="emote-details">
+                    <p class="emote-name">Dance of Constellation</p>
+                    <p class="emote-id">ID: 909037003</p>
+                </div>
+                <button class="send-button" data-emote-id="909037003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037004.png" alt="Trophy Grab">
+                <div class="emote-details">
+                    <p class="emote-name">Trophy Grab</p>
+                    <p class="emote-id">ID: 909037004</p>
+                </div>
+                <button class="send-button" data-emote-id="909037004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037005.png" alt="Starry Hands">
+                <div class="emote-details">
+                    <p class="emote-name">Starry Hands</p>
+                    <p class="emote-id">ID: 909037005</p>
+                </div>
+                <button class="send-button" data-emote-id="909037005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037006.png" alt="Yum">
+                <div class="emote-details">
+                    <p class="emote-name">Yum</p>
+                    <p class="emote-id">ID: 909037006</p>
+                </div>
+                <button class="send-button" data-emote-id="909037006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037007.png" alt="Happy Dancing">
+                <div class="emote-details">
+                    <p class="emote-name">Happy Dancing</p>
+                    <p class="emote-id">ID: 909037007</p>
+                </div>
+                <button class="send-button" data-emote-id="909037007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037008.png" alt="Juggle">
+                <div class="emote-details">
+                    <p class="emote-name">Juggle</p>
+                    <p class="emote-id">ID: 909037008</p>
+                </div>
+                <button class="send-button" data-emote-id="909037008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037009.png" alt="Neon Sign">
+                <div class="emote-details">
+                    <p class="emote-name">Neon Sign</p>
+                    <p class="emote-id">ID: 909037009</p>
+                </div>
+                <button class="send-button" data-emote-id="909037009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037010.png" alt="Beast Tease">
+                <div class="emote-details">
+                    <p class="emote-name">Beast Tease</p>
+                    <p class="emote-id">ID: 909037010</p>
+                </div>
+                <button class="send-button" data-emote-id="909037010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037011.png" alt="Drachen Tear">
+                <div class="emote-details">
+                    <p class="emote-name">Drachen Tear</p>
+                    <p class="emote-id">ID: 909037011</p>
+                </div>
+                <button class="send-button" data-emote-id="909037011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909037012.png" alt="Clap Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Clap Dance</p>
+                    <p class="emote-id">ID: 909037012</p>
+                </div>
+                <button class="send-button" data-emote-id="909037012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038001.png" alt="The Influencer">
+                <div class="emote-details">
+                    <p class="emote-name">The Influencer</p>
+                    <p class="emote-id">ID: 909038001</p>
+                </div>
+                <button class="send-button" data-emote-id="909038001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038002.png" alt="Name Not Found">
+                <div class="emote-details">
+                    <p class="emote-name">Name Not Found</p>
+                    <p class="emote-id">ID: 909038002</p>
+                </div>
+                <button class="send-button" data-emote-id="909038002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038003.png" alt="Techno Blast">
+                <div class="emote-details">
+                    <p class="emote-name">Techno Blast</p>
+                    <p class="emote-id">ID: 909038003</p>
+                </div>
+                <button class="send-button" data-emote-id="909038003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038004.png" alt="Be My Valentine">
+                <div class="emote-details">
+                    <p class="emote-name">Be My Valentine</p>
+                    <p class="emote-id">ID: 909038004</p>
+                </div>
+                <button class="send-button" data-emote-id="909038004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038005.png" alt="Angry Walk">
+                <div class="emote-details">
+                    <p class="emote-name">Angry Walk</p>
+                    <p class="emote-id">ID: 909038005</p>
+                </div>
+                <button class="send-button" data-emote-id="909038005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038006.png" alt="Make Some Noise">
+                <div class="emote-details">
+                    <p class="emote-name">Make Some Noise</p>
+                    <p class="emote-id">ID: 909038006</p>
+                </div>
+                <button class="send-button" data-emote-id="909038006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038008.png" alt="Croco Hooray">
+                <div class="emote-details">
+                    <p class="emote-name">Croco Hooray</p>
+                    <p class="emote-id">ID: 909038008</p>
+                </div>
+                <button class="send-button" data-emote-id="909038008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038009.png" alt="Scorpio Spin">
+                <div class="emote-details">
+                    <p class="emote-name">Scorpio Spin</p>
+                    <p class="emote-id">ID: 909038009</p>
+                </div>
+                <button class="send-button" data-emote-id="909038009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038010.png" alt="Cinder Summon">
+                <div class="emote-details">
+                    <p class="emote-name">Cinder Summon</p>
+                    <p class="emote-id">ID: 909038010</p>
+                </div>
+                <button class="send-button" data-emote-id="909038010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038011.png" alt="Shall We Dance?">
+                <div class="emote-details">
+                    <p class="emote-name">Shall We Dance?</p>
+                    <p class="emote-id">ID: 909038011</p>
+                </div>
+                <button class="send-button" data-emote-id="909038011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038012.png" alt="Achiever Flip">
+                <div class="emote-details">
+                    <p class="emote-name">Achiever Flip</p>
+                    <p class="emote-id">ID: 909038012</p>
+                </div>
+                <button class="send-button" data-emote-id="909038012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909038013.png" alt="Spin Master">
+                <div class="emote-details">
+                    <p class="emote-name">Spin Master</p>
+                    <p class="emote-id">ID: 909038013</p>
+                </div>
+                <button class="send-button" data-emote-id="909038013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039001.png" alt="Festival Celebration">
+                <div class="emote-details">
+                    <p class="emote-name">Festival Celebration</p>
+                    <p class="emote-id">ID: 909039001</p>
+                </div>
+                <button class="send-button" data-emote-id="909039001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039002.png" alt="Artistic Musical Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Artistic Musical Dance</p>
+                    <p class="emote-id">ID: 909039002</p>
+                </div>
+                <button class="send-button" data-emote-id="909039002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039003.png" alt="Forward, Backward">
+                <div class="emote-details">
+                    <p class="emote-name">Forward, Backward</p>
+                    <p class="emote-id">ID: 909039003</p>
+                </div>
+                <button class="send-button" data-emote-id="909039003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039004.png" alt="Scorpion Friend">
+                <div class="emote-details">
+                    <p class="emote-name">Scorpion Friend</p>
+                    <p class="emote-id">ID: 909039004</p>
+                </div>
+                <button class="send-button" data-emote-id="909039004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039005.png" alt="Aching Power">
+                <div class="emote-details">
+                    <p class="emote-name">Aching Power</p>
+                    <p class="emote-id">ID: 909039005</p>
+                </div>
+                <button class="send-button" data-emote-id="909039005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039006.png" alt="Earthly Force">
+                <div class="emote-details">
+                    <p class="emote-name">Earthly Force</p>
+                    <p class="emote-id">ID: 909039006</p>
+                </div>
+                <button class="send-button" data-emote-id="909039006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039007.png" alt="Grenade Magic">
+                <div class="emote-details">
+                    <p class="emote-name">Grenade Magic</p>
+                    <p class="emote-id">ID: 909039007</p>
+                </div>
+                <button class="send-button" data-emote-id="909039007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039008.png" alt="Oh Yeah!">
+                <div class="emote-details">
+                    <p class="emote-name">Oh Yeah!</p>
+                    <p class="emote-id">ID: 909039008</p>
+                </div>
+                <button class="send-button" data-emote-id="909039008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039009.png" alt="Grace On Wheels">
+                <div class="emote-details">
+                    <p class="emote-name">Grace On Wheels</p>
+                    <p class="emote-id">ID: 909039009</p>
+                </div>
+                <button class="send-button" data-emote-id="909039009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039010.png" alt="Flex">
+                <div class="emote-details">
+                    <p class="emote-name">Flex</p>
+                    <p class="emote-id">ID: 909039010</p>
+                </div>
+                <button class="send-button" data-emote-id="909039010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039011.png" alt="Crimson Doom">
+                <div class="emote-details">
+                    <p class="emote-name">Crimson Doom</p>
+                    <p class="emote-id">ID: 909039011</p>
+                </div>
+                <button class="send-button" data-emote-id="909039011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039012.png" alt="Fire Beast Tamer">
+                <div class="emote-details">
+                    <p class="emote-name">Fire Beast Tamer</p>
+                    <p class="emote-id">ID: 909039012</p>
+                </div>
+                <button class="send-button" data-emote-id="909039012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039013.png" alt="Crimson Tunes">
+                <div class="emote-details">
+                    <p class="emote-name">Crimson Tunes</p>
+                    <p class="emote-id">ID: 909039013</p>
+                </div>
+                <button class="send-button" data-emote-id="909039013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909039014.png" alt="Swaggy V-Steps">
+                <div class="emote-details">
+                    <p class="emote-name">Swaggy V-Steps</p>
+                    <p class="emote-id">ID: 909039014</p>
+                </div>
+                <button class="send-button" data-emote-id="909039014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040001.png" alt="The Chromatic Finish">
+                <div class="emote-details">
+                    <p class="emote-name">The Chromatic Finish</p>
+                    <p class="emote-id">ID: 909040001</p>
+                </div>
+                <button class="send-button" data-emote-id="909040001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040002.png" alt="Smash the Feather">
+                <div class="emote-details">
+                    <p class="emote-name">Smash the Feather</p>
+                    <p class="emote-id">ID: 909040002</p>
+                </div>
+                <button class="send-button" data-emote-id="909040002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040003.png" alt="Sonorous Steps">
+                <div class="emote-details">
+                    <p class="emote-name">Sonorous Steps</p>
+                    <p class="emote-id">ID: 909040003</p>
+                </div>
+                <button class="send-button" data-emote-id="909040003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040004.png" alt="Fishing for Wisdom">
+                <div class="emote-details">
+                    <p class="emote-name">Fishing for Wisdom</p>
+                    <p class="emote-id">ID: 909040004</p>
+                </div>
+                <button class="send-button" data-emote-id="909040004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040005.png" alt="Chromatic Pop Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Chromatic Pop Dance</p>
+                    <p class="emote-id">ID: 909040005</p>
+                </div>
+                <button class="send-button" data-emote-id="909040005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040006.png" alt="Chroma Twist Twist">
+                <div class="emote-details">
+                    <p class="emote-name">Chroma Twist Twist</p>
+                    <p class="emote-id">ID: 909040006</p>
+                </div>
+                <button class="send-button" data-emote-id="909040006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040008.png" alt="Birth of Justice">
+                <div class="emote-details">
+                    <p class="emote-name">Birth of Justice</p>
+                    <p class="emote-id">ID: 909040008</p>
+                </div>
+                <button class="send-button" data-emote-id="909040008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040009.png" alt="Spider-Sense">
+                <div class="emote-details">
+                    <p class="emote-name">Spider-Sense</p>
+                    <p class="emote-id">ID: 909040009</p>
+                </div>
+                <button class="send-button" data-emote-id="909040009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040011.png" alt="Play With Thunderbolt">
+                <div class="emote-details">
+                    <p class="emote-name">Play With Thunderbolt</p>
+                    <p class="emote-id">ID: 909040011</p>
+                </div>
+                <button class="send-button" data-emote-id="909040011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040012.png" alt="6th Anniversary Celebration">
+                <div class="emote-details">
+                    <p class="emote-name">6th Anniversary Celebration</p>
+                    <p class="emote-id">ID: 909040012</p>
+                </div>
+                <button class="send-button" data-emote-id="909040012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040013.png" alt="Wisdom Swing">
+                <div class="emote-details">
+                    <p class="emote-name">Wisdom Swing</p>
+                    <p class="emote-id">ID: 909040013</p>
+                </div>
+                <button class="send-button" data-emote-id="909040013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909040014.png" alt="Helicopter Shot">
+                <div class="emote-details">
+                    <p class="emote-name">Helicopter Shot</p>
+                    <p class="emote-id">ID: 909040014</p>
+                </div>
+                <button class="send-button" data-emote-id="909040014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041001.png" alt="Thunder Breathing First Form: Thunder Flash">
+                <div class="emote-details">
+                    <p class="emote-name">Thunder Breathing First Form: Thunder Flash</p>
+                    <p class="emote-id">ID: 909041001</p>
+                </div>
+                <button class="send-button" data-emote-id="909041001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041002.png" alt="Water Breathing Sixth Form: Whirlpool">
+                <div class="emote-details">
+                    <p class="emote-name">Water Breathing Sixth Form: Whirlpool</p>
+                    <p class="emote-id">ID: 909041002</p>
+                </div>
+                <button class="send-button" data-emote-id="909041002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041003.png" alt="Beast Breathing Fifth Fang: Crazy Cutting">
+                <div class="emote-details">
+                    <p class="emote-name">Beast Breathing Fifth Fang: Crazy Cutting</p>
+                    <p class="emote-id">ID: 909041003</p>
+                </div>
+                <button class="send-button" data-emote-id="909041003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041004.png" alt="Flying Ink Sword">
+                <div class="emote-details">
+                    <p class="emote-name">Flying Ink Sword</p>
+                    <p class="emote-id">ID: 909041004</p>
+                </div>
+                <button class="send-button" data-emote-id="909041004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041005.png" alt="Diz My Popblaster">
+                <div class="emote-details">
+                    <p class="emote-name">Diz My Popblaster</p>
+                    <p class="emote-id">ID: 909041005</p>
+                </div>
+                <button class="send-button" data-emote-id="909041005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041006.png" alt="Dance Puppet, Dance!">
+                <div class="emote-details">
+                    <p class="emote-name">Dance Puppet, Dance!</p>
+                    <p class="emote-id">ID: 909041006</p>
+                </div>
+                <button class="send-button" data-emote-id="909041006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041007.png" alt="High Knees">
+                <div class="emote-details">
+                    <p class="emote-name">High Knees</p>
+                    <p class="emote-id">ID: 909041007</p>
+                </div>
+                <button class="send-button" data-emote-id="909041007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041008.png" alt="Bony Fumes">
+                <div class="emote-details">
+                    <p class="emote-name">Bony Fumes</p>
+                    <p class="emote-id">ID: 909041008</p>
+                </div>
+                <button class="send-button" data-emote-id="909041008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041009.png" alt="Feel the Electricity">
+                <div class="emote-details">
+                    <p class="emote-name">Feel the Electricity</p>
+                    <p class="emote-id">ID: 909041009</p>
+                </div>
+                <button class="send-button" data-emote-id="909041009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041010.png" alt="Whac-A-Cotton">
+                <div class="emote-details">
+                    <p class="emote-name">Whac-A-Cotton</p>
+                    <p class="emote-id">ID: 909041010</p>
+                </div>
+                <button class="send-button" data-emote-id="909041010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041011.png" alt="Honorable Mention Emote">
+                <div class="emote-details">
+                    <p class="emote-name">Honorable Mention Emote</p>
+                    <p class="emote-id">ID: 909041011</p>
+                </div>
+                <button class="send-button" data-emote-id="909041011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041012.png" alt="BR-Ranked Grandmaster Emote">
+                <div class="emote-details">
+                    <p class="emote-name">BR-Ranked Grandmaster Emote</p>
+                    <p class="emote-id">ID: 909041012</p>
+                </div>
+                <button class="send-button" data-emote-id="909041012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041013.png" alt="CS-Ranked Grandmaster Emote">
+                <div class="emote-details">
+                    <p class="emote-name">CS-Ranked Grandmaster Emote</p>
+                    <p class="emote-id">ID: 909041013</p>
+                </div>
+                <button class="send-button" data-emote-id="909041013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041014.png" alt="Monster Clubbing">
+                <div class="emote-details">
+                    <p class="emote-name">Monster Clubbing</p>
+                    <p class="emote-id">ID: 909041014</p>
+                </div>
+                <button class="send-button" data-emote-id="909041014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909041015.png" alt="Basudara Dance">
+                <div class="emote-details">
+                    <p class="emote-name">Basudara Dance</p>
+                    <p class="emote-id">ID: 909041015</p>
+                </div>
+                <button class="send-button" data-emote-id="909041015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042001.png" alt="Stir-Fry Frostfire">
+                <div class="emote-details">
+                    <p class="emote-name">Stir-Fry Frostfire</p>
+                    <p class="emote-id">ID: 909042001</p>
+                </div>
+                <button class="send-button" data-emote-id="909042001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042002.png" alt="Money Rain">
+                <div class="emote-details">
+                    <p class="emote-name">Money Rain</p>
+                    <p class="emote-id">ID: 909042002</p>
+                </div>
+                <button class="send-button" data-emote-id="909042002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042003.png" alt="Frostfire&#39;s Calling">
+                <div class="emote-details">
+                    <p class="emote-name">Frostfire&#39;s Calling</p>
+                    <p class="emote-id">ID: 909042003</p>
+                </div>
+                <button class="send-button" data-emote-id="909042003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042004.png" alt="Stomping Foot">
+                <div class="emote-details">
+                    <p class="emote-name">Stomping Foot</p>
+                    <p class="emote-id">ID: 909042004</p>
+                </div>
+                <button class="send-button" data-emote-id="909042004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042005.png" alt="This Way">
+                <div class="emote-details">
+                    <p class="emote-name">This Way</p>
+                    <p class="emote-id">ID: 909042005</p>
+                </div>
+                <button class="send-button" data-emote-id="909042005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042006.png" alt="Excellent Service">
+                <div class="emote-details">
+                    <p class="emote-name">Excellent Service</p>
+                    <p class="emote-id">ID: 909042006</p>
+                </div>
+                <button class="send-button" data-emote-id="909042006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042009.png" alt="Celebration Schuss">
+                <div class="emote-details">
+                    <p class="emote-name">Celebration Schuss</p>
+                    <p class="emote-id">ID: 909042009</p>
+                </div>
+                <button class="send-button" data-emote-id="909042009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042011.png" alt="Dawn Voyage Emote">
+                <div class="emote-details">
+                    <p class="emote-name">Dawn Voyage Emote</p>
+                    <p class="emote-id">ID: 909042011</p>
+                </div>
+                <button class="send-button" data-emote-id="909042011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042012.png" alt="Lamborghini Ride">
+                <div class="emote-details">
+                    <p class="emote-name">Lamborghini Ride</p>
+                    <p class="emote-id">ID: 909042012</p>
+                </div>
+                <button class="send-button" data-emote-id="909042012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042013.png" alt="Hello! Frostfire Style">
+                <div class="emote-details">
+                    <p class="emote-name">Hello! Frostfire Style</p>
+                    <p class="emote-id">ID: 909042013</p>
+                </div>
+                <button class="send-button" data-emote-id="909042013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042016.png" alt="Hand Grooves">
+                <div class="emote-details">
+                    <p class="emote-name">Hand Grooves</p>
+                    <p class="emote-id">ID: 909042016</p>
+                </div>
+                <button class="send-button" data-emote-id="909042016">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042017.png" alt="Free Fire Toiletman">
+                <div class="emote-details">
+                    <p class="emote-name">Free Fire Toiletman</p>
+                    <p class="emote-id">ID: 909042017</p>
+                </div>
+                <button class="send-button" data-emote-id="909042017">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909042018.png" alt="Kemusan">
+                <div class="emote-details">
+                    <p class="emote-name">Kemusan</p>
+                    <p class="emote-id">ID: 909042018</p>
+                </div>
+                <button class="send-button" data-emote-id="909042018">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043001.png" alt="Ribbit Rider">
+                <div class="emote-details">
+                    <p class="emote-name">Ribbit Rider</p>
+                    <p class="emote-id">ID: 909043001</p>
+                </div>
+                <button class="send-button" data-emote-id="909043001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043002.png" alt="Inner Self Mastery">
+                <div class="emote-details">
+                    <p class="emote-name">Inner Self Mastery</p>
+                    <p class="emote-id">ID: 909043002</p>
+                </div>
+                <button class="send-button" data-emote-id="909043002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043003.png" alt="Emperor&#39;s Treasure Machine">
+                <div class="emote-details">
+                    <p class="emote-name">Emperor&#39;s Treasure Machine</p>
+                    <p class="emote-id">ID: 909043003</p>
+                </div>
+                <button class="send-button" data-emote-id="909043003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043004.png" alt="Why So Chaos?">
+                <div class="emote-details">
+                    <p class="emote-name">Why So Chaos?</p>
+                    <p class="emote-id">ID: 909043004</p>
+                </div>
+                <button class="send-button" data-emote-id="909043004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043005.png" alt="Huge Feast">
+                <div class="emote-details">
+                    <p class="emote-name">Huge Feast</p>
+                    <p class="emote-id">ID: 909043005</p>
+                </div>
+                <button class="send-button" data-emote-id="909043005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043006.png" alt="Color Burst">
+                <div class="emote-details">
+                    <p class="emote-name">Color Burst</p>
+                    <p class="emote-id">ID: 909043006</p>
+                </div>
+                <button class="send-button" data-emote-id="909043006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043007.png" alt="Dragon Swipe">
+                <div class="emote-details">
+                    <p class="emote-name">Dragon Swipe</p>
+                    <p class="emote-id">ID: 909043007</p>
+                </div>
+                <button class="send-button" data-emote-id="909043007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043008.png" alt="Samba">
+                <div class="emote-details">
+                    <p class="emote-name">Samba</p>
+                    <p class="emote-id">ID: 909043008</p>
+                </div>
+                <button class="send-button" data-emote-id="909043008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043009.png" alt="Speed Summon">
+                <div class="emote-details">
+                    <p class="emote-name">Speed Summon</p>
+                    <p class="emote-id">ID: 909043009</p>
+                </div>
+                <button class="send-button" data-emote-id="909043009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043010.png" alt="What a Match">
+                <div class="emote-details">
+                    <p class="emote-name">What a Match</p>
+                    <p class="emote-id">ID: 909043010</p>
+                </div>
+                <button class="send-button" data-emote-id="909043010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909043013.png" alt="What a Pair">
+                <div class="emote-details">
+                    <p class="emote-name">What a Pair</p>
+                    <p class="emote-id">ID: 909043013</p>
+                </div>
+                <button class="send-button" data-emote-id="909043013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044001.png" alt="Byte Mounting">
+                <div class="emote-details">
+                    <p class="emote-name">Byte Mounting</p>
+                    <p class="emote-id">ID: 909044001</p>
+                </div>
+                <button class="send-button" data-emote-id="909044001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044002.png" alt="The Unicyclist">
+                <div class="emote-details">
+                    <p class="emote-name">The Unicyclist</p>
+                    <p class="emote-id">ID: 909044002</p>
+                </div>
+                <button class="send-button" data-emote-id="909044002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044003.png" alt="Basket Rafting">
+                <div class="emote-details">
+                    <p class="emote-name">Basket Rafting</p>
+                    <p class="emote-id">ID: 909044003</p>
+                </div>
+                <button class="send-button" data-emote-id="909044003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044004.png" alt="Happy Lamb Shouldering">
+                <div class="emote-details">
+                    <p class="emote-name">Happy Lamb Shouldering</p>
+                    <p class="emote-id">ID: 909044004</p>
+                </div>
+                <button class="send-button" data-emote-id="909044004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044005.png" alt="Paradox of Enlightenment">
+                <div class="emote-details">
+                    <p class="emote-name">Paradox of Enlightenment</p>
+                    <p class="emote-id">ID: 909044005</p>
+                </div>
+                <button class="send-button" data-emote-id="909044005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044006.png" alt="Harmonious Paradox">
+                <div class="emote-details">
+                    <p class="emote-name">Harmonious Paradox</p>
+                    <p class="emote-id">ID: 909044006</p>
+                </div>
+                <button class="send-button" data-emote-id="909044006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044007.png" alt="Raise Your Thumb!">
+                <div class="emote-details">
+                    <p class="emote-name">Raise Your Thumb!</p>
+                    <p class="emote-id">ID: 909044007</p>
+                </div>
+                <button class="send-button" data-emote-id="909044007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044015.png" alt="The Final Paradox">
+                <div class="emote-details">
+                    <p class="emote-name">The Final Paradox</p>
+                    <p class="emote-id">ID: 909044015</p>
+                </div>
+                <button class="send-button" data-emote-id="909044015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909044016.png" alt="Honk Up!">
+                <div class="emote-details">
+                    <p class="emote-name">Honk Up!</p>
+                    <p class="emote-id">ID: 909044016</p>
+                </div>
+                <button class="send-button" data-emote-id="909044016">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045002.png" alt="Spring Rocker">
+                <div class="emote-details">
+                    <p class="emote-name">Spring Rocker</p>
+                    <p class="emote-id">ID: 909045002</p>
+                </div>
+                <button class="send-button" data-emote-id="909045002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045003.png" alt="Giddy Up!">
+                <div class="emote-details">
+                    <p class="emote-name">Giddy Up!</p>
+                    <p class="emote-id">ID: 909045003</p>
+                </div>
+                <button class="send-button" data-emote-id="909045003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045004.png" alt="The Goosy Dance">
+                <div class="emote-details">
+                    <p class="emote-name">The Goosy Dance</p>
+                    <p class="emote-id">ID: 909045004</p>
+                </div>
+                <button class="send-button" data-emote-id="909045004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045005.png" alt="Captain Victor">
+                <div class="emote-details">
+                    <p class="emote-name">Captain Victor</p>
+                    <p class="emote-id">ID: 909045005</p>
+                </div>
+                <button class="send-button" data-emote-id="909045005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045010.png" alt="A Flower Salute">
+                <div class="emote-details">
+                    <p class="emote-name">A Flower Salute</p>
+                    <p class="emote-id">ID: 909045010</p>
+                </div>
+                <button class="send-button" data-emote-id="909045010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045011.png" alt="Little Foxy Run">
+                <div class="emote-details">
+                    <p class="emote-name">Little Foxy Run</p>
+                    <p class="emote-id">ID: 909045011</p>
+                </div>
+                <button class="send-button" data-emote-id="909045011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045012.png" alt="Mr. Waggor&#39;s Seesaw">
+                <div class="emote-details">
+                    <p class="emote-name">Mr. Waggor&#39;s Seesaw</p>
+                    <p class="emote-id">ID: 909045012</p>
+                </div>
+                <button class="send-button" data-emote-id="909045012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045015.png" alt="Floating Meditation">
+                <div class="emote-details">
+                    <p class="emote-name">Floating Meditation</p>
+                    <p class="emote-id">ID: 909045015</p>
+                </div>
+                <button class="send-button" data-emote-id="909045015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045016.png" alt="Naatu Naatu">
+                <div class="emote-details">
+                    <p class="emote-name">Naatu Naatu</p>
+                    <p class="emote-id">ID: 909045016</p>
+                </div>
+                <button class="send-button" data-emote-id="909045016">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909045017.png" alt="Champion&#39;s Walk">
+                <div class="emote-details">
+                    <p class="emote-name">Champion&#39;s Walk</p>
+                    <p class="emote-id">ID: 909045017</p>
+                </div>
+                <button class="send-button" data-emote-id="909045017">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046001.png" alt="Aura Boarder">
+                <div class="emote-details">
+                    <p class="emote-name">Aura Boarder</p>
+                    <p class="emote-id">ID: 909046001</p>
+                </div>
+                <button class="send-button" data-emote-id="909046001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046002.png" alt="Who&#39;s the Booyah Champ!">
+                <div class="emote-details">
+                    <p class="emote-name">Who&#39;s the Booyah Champ!</p>
+                    <p class="emote-id">ID: 909046002</p>
+                </div>
+                <button class="send-button" data-emote-id="909046002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046003.png" alt="Controlled Combustion">
+                <div class="emote-details">
+                    <p class="emote-name">Controlled Combustion</p>
+                    <p class="emote-id">ID: 909046003</p>
+                </div>
+                <button class="send-button" data-emote-id="909046003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046004.png" alt="Cheers to Victory!">
+                <div class="emote-details">
+                    <p class="emote-name">Cheers to Victory!</p>
+                    <p class="emote-id">ID: 909046004</p>
+                </div>
+                <button class="send-button" data-emote-id="909046004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046005.png" alt="Shoe Shining">
+                <div class="emote-details">
+                    <p class="emote-name">Shoe Shining</p>
+                    <p class="emote-id">ID: 909046005</p>
+                </div>
+                <button class="send-button" data-emote-id="909046005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046006.png" alt="Gunspinning">
+                <div class="emote-details">
+                    <p class="emote-name">Gunspinning</p>
+                    <p class="emote-id">ID: 909046006</p>
+                </div>
+                <button class="send-button" data-emote-id="909046006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046007.png" alt="Crowd Pleaser">
+                <div class="emote-details">
+                    <p class="emote-name">Crowd Pleaser</p>
+                    <p class="emote-id">ID: 909046007</p>
+                </div>
+                <button class="send-button" data-emote-id="909046007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046008.png" alt="No Sweat">
+                <div class="emote-details">
+                    <p class="emote-name">No Sweat</p>
+                    <p class="emote-id">ID: 909046008</p>
+                </div>
+                <button class="send-button" data-emote-id="909046008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046009.png" alt="Magma Quake">
+                <div class="emote-details">
+                    <p class="emote-name">Magma Quake</p>
+                    <p class="emote-id">ID: 909046009</p>
+                </div>
+                <button class="send-button" data-emote-id="909046009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046010.png" alt="Max Firepower">
+                <div class="emote-details">
+                    <p class="emote-name">Max Firepower</p>
+                    <p class="emote-id">ID: 909046010</p>
+                </div>
+                <button class="send-button" data-emote-id="909046010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046011.png" alt="Can&#39;t Touch This">
+                <div class="emote-details">
+                    <p class="emote-name">Can&#39;t Touch This</p>
+                    <p class="emote-id">ID: 909046011</p>
+                </div>
+                <button class="send-button" data-emote-id="909046011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046012.png" alt="Firestarter">
+                <div class="emote-details">
+                    <p class="emote-name">Firestarter</p>
+                    <p class="emote-id">ID: 909046012</p>
+                </div>
+                <button class="send-button" data-emote-id="909046012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046013.png" alt="FFWS Flag Flair">
+                <div class="emote-details">
+                    <p class="emote-name">FFWS Flag Flair</p>
+                    <p class="emote-id">ID: 909046013</p>
+                </div>
+                <button class="send-button" data-emote-id="909046013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046014.png" alt="Beat Drop">
+                <div class="emote-details">
+                    <p class="emote-name">Beat Drop</p>
+                    <p class="emote-id">ID: 909046014</p>
+                </div>
+                <button class="send-button" data-emote-id="909046014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046015.png" alt="Isagi&#39;s Spatial Awareness">
+                <div class="emote-details">
+                    <p class="emote-name">Isagi&#39;s Spatial Awareness</p>
+                    <p class="emote-id">ID: 909046015</p>
+                </div>
+                <button class="send-button" data-emote-id="909046015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046016.png" alt="Nagi&#39;s Trapping">
+                <div class="emote-details">
+                    <p class="emote-name">Nagi&#39;s Trapping</p>
+                    <p class="emote-id">ID: 909046016</p>
+                </div>
+                <button class="send-button" data-emote-id="909046016">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909046017.png" alt="Soaring Up">
+                <div class="emote-details">
+                    <p class="emote-name">Soaring Up</p>
+                    <p class="emote-id">ID: 909046017</p>
+                </div>
+                <button class="send-button" data-emote-id="909046017">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047001.png" alt="I Won&#39;t Bow Down">
+                <div class="emote-details">
+                    <p class="emote-name">I Won&#39;t Bow Down</p>
+                    <p class="emote-id">ID: 909047001</p>
+                </div>
+                <button class="send-button" data-emote-id="909047001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047002.png" alt="Aurora Iridescence">
+                <div class="emote-details">
+                    <p class="emote-name">Aurora Iridescence</p>
+                    <p class="emote-id">ID: 909047002</p>
+                </div>
+                <button class="send-button" data-emote-id="909047002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047003.png" alt="Couch For Two">
+                <div class="emote-details">
+                    <p class="emote-name">Couch For Two</p>
+                    <p class="emote-id">ID: 909047003</p>
+                </div>
+                <button class="send-button" data-emote-id="909047003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047004.png" alt="Flutter Dash">
+                <div class="emote-details">
+                    <p class="emote-name">Flutter Dash</p>
+                    <p class="emote-id">ID: 909047004</p>
+                </div>
+                <button class="send-button" data-emote-id="909047004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047005.png" alt="Slippery Throne">
+                <div class="emote-details">
+                    <p class="emote-name">Slippery Throne</p>
+                    <p class="emote-id">ID: 909047005</p>
+                </div>
+                <button class="send-button" data-emote-id="909047005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047006.png" alt="Acceptance Speech">
+                <div class="emote-details">
+                    <p class="emote-name">Acceptance Speech</p>
+                    <p class="emote-id">ID: 909047006</p>
+                </div>
+                <button class="send-button" data-emote-id="909047006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047007.png" alt="Love Me, Love Me Not">
+                <div class="emote-details">
+                    <p class="emote-name">Love Me, Love Me Not</p>
+                    <p class="emote-id">ID: 909047007</p>
+                </div>
+                <button class="send-button" data-emote-id="909047007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047008.png" alt="Scissor Savvy">
+                <div class="emote-details">
+                    <p class="emote-name">Scissor Savvy</p>
+                    <p class="emote-id">ID: 909047008</p>
+                </div>
+                <button class="send-button" data-emote-id="909047008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047009.png" alt="The Thinker">
+                <div class="emote-details">
+                    <p class="emote-name">The Thinker</p>
+                    <p class="emote-id">ID: 909047009</p>
+                </div>
+                <button class="send-button" data-emote-id="909047009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047012.png" alt="JKT48 No.1">
+                <div class="emote-details">
+                    <p class="emote-name">JKT48 No.1</p>
+                    <p class="emote-id">ID: 909047012</p>
+                </div>
+                <button class="send-button" data-emote-id="909047012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047015.png" alt="Rasengan">
+                <div class="emote-details">
+                    <p class="emote-name">Rasengan</p>
+                    <p class="emote-id">ID: 909047015</p>
+                </div>
+                <button class="send-button" data-emote-id="909047015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909047019.png" alt="Clone Jutsu">
+                <div class="emote-details">
+                    <p class="emote-name">Clone Jutsu</p>
+                    <p class="emote-id">ID: 909047019</p>
+                </div>
+                <button class="send-button" data-emote-id="909047019">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048001.png" alt="To the Rescue">
+                <div class="emote-details">
+                    <p class="emote-name">To the Rescue</p>
+                    <p class="emote-id">ID: 909048001</p>
+                </div>
+                <button class="send-button" data-emote-id="909048001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048002.png" alt="Midnight Peruse">
+                <div class="emote-details">
+                    <p class="emote-name">Midnight Peruse</p>
+                    <p class="emote-id">ID: 909048002</p>
+                </div>
+                <button class="send-button" data-emote-id="909048002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048003.png" alt="Guitar Groove">
+                <div class="emote-details">
+                    <p class="emote-name">Guitar Groove</p>
+                    <p class="emote-id">ID: 909048003</p>
+                </div>
+                <button class="send-button" data-emote-id="909048003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048004.png" alt="Keyboard Player">
+                <div class="emote-details">
+                    <p class="emote-name">Keyboard Player</p>
+                    <p class="emote-id">ID: 909048004</p>
+                </div>
+                <button class="send-button" data-emote-id="909048004">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048005.png" alt="On Drums">
+                <div class="emote-details">
+                    <p class="emote-name">On Drums</p>
+                    <p class="emote-id">ID: 909048005</p>
+                </div>
+                <button class="send-button" data-emote-id="909048005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048006.png" alt="Chac-Chac">
+                <div class="emote-details">
+                    <p class="emote-name">Chac-Chac</p>
+                    <p class="emote-id">ID: 909048006</p>
+                </div>
+                <button class="send-button" data-emote-id="909048006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048007.png" alt="Pillow Fight">
+                <div class="emote-details">
+                    <p class="emote-name">Pillow Fight</p>
+                    <p class="emote-id">ID: 909048007</p>
+                </div>
+                <button class="send-button" data-emote-id="909048007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048009.png" alt="Goofy Camel">
+                <div class="emote-details">
+                    <p class="emote-name">Goofy Camel</p>
+                    <p class="emote-id">ID: 909048009</p>
+                </div>
+                <button class="send-button" data-emote-id="909048009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048010.png" alt="Hit a Six!">
+                <div class="emote-details">
+                    <p class="emote-name">Hit a Six!</p>
+                    <p class="emote-id">ID: 909048010</p>
+                </div>
+                <button class="send-button" data-emote-id="909048010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048011.png" alt="Flag Summon">
+                <div class="emote-details">
+                    <p class="emote-name">Flag Summon</p>
+                    <p class="emote-id">ID: 909048011</p>
+                </div>
+                <button class="send-button" data-emote-id="909048011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048014.png" alt="Slurp slurp!">
+                <div class="emote-details">
+                    <p class="emote-name">Slurp slurp!</p>
+                    <p class="emote-id">ID: 909048014</p>
+                </div>
+                <button class="send-button" data-emote-id="909048014">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048015.png" alt="Sketching">
+                <div class="emote-details">
+                    <p class="emote-name">Sketching</p>
+                    <p class="emote-id">ID: 909048015</p>
+                </div>
+                <button class="send-button" data-emote-id="909048015">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048016.png" alt="Half-Time Chilling">
+                <div class="emote-details">
+                    <p class="emote-name">Half-Time Chilling</p>
+                    <p class="emote-id">ID: 909048016</p>
+                </div>
+                <button class="send-button" data-emote-id="909048016">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909048017.png" alt="Throw-In">
+                <div class="emote-details">
+                    <p class="emote-name">Throw-In</p>
+                    <p class="emote-id">ID: 909048017</p>
+                </div>
+                <button class="send-button" data-emote-id="909048017">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049001.png" alt="Nailoong Time!">
+                <div class="emote-details">
+                    <p class="emote-name">Nailoong Time!</p>
+                    <p class="emote-id">ID: 909049001</p>
+                </div>
+                <button class="send-button" data-emote-id="909049001">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049002.png" alt="Hand Raise">
+                <div class="emote-details">
+                    <p class="emote-name">Hand Raise</p>
+                    <p class="emote-id">ID: 909049002</p>
+                </div>
+                <button class="send-button" data-emote-id="909049002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049003.png" alt="Kick It Up">
+                <div class="emote-details">
+                    <p class="emote-name">Kick It Up</p>
+                    <p class="emote-id">ID: 909049003</p>
+                </div>
+                <button class="send-button" data-emote-id="909049003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049006.png" alt="Creation Days">
+                <div class="emote-details">
+                    <p class="emote-name">Creation Days</p>
+                    <p class="emote-id">ID: 909049006</p>
+                </div>
+                <button class="send-button" data-emote-id="909049006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049007.png" alt="Raining Coins">
+                <div class="emote-details">
+                    <p class="emote-name">Raining Coins</p>
+                    <p class="emote-id">ID: 909049007</p>
+                </div>
+                <button class="send-button" data-emote-id="909049007">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049008.png" alt="Clap Clap Hooray">
+                <div class="emote-details">
+                    <p class="emote-name">Clap Clap Hooray</p>
+                    <p class="emote-id">ID: 909049008</p>
+                </div>
+                <button class="send-button" data-emote-id="909049008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049009.png" alt="Infinite Loops">
+                <div class="emote-details">
+                    <p class="emote-name">Infinite Loops</p>
+                    <p class="emote-id">ID: 909049009</p>
+                </div>
+                <button class="send-button" data-emote-id="909049009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049010.png" alt="P90 Surfer">
+                <div class="emote-details">
+                    <p class="emote-name">P90 Surfer</p>
+                    <p class="emote-id">ID: 909049010</p>
+                </div>
+                <button class="send-button" data-emote-id="909049010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049011.png" alt="Boxing Machine">
+                <div class="emote-details">
+                    <p class="emote-name">Boxing Machine</p>
+                    <p class="emote-id">ID: 909049011</p>
+                </div>
+                <button class="send-button" data-emote-id="909049011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049013.png" alt="Comic Barf">
+                <div class="emote-details">
+                    <p class="emote-name">Comic Barf</p>
+                    <p class="emote-id">ID: 909049013</p>
+                </div>
+                <button class="send-button" data-emote-id="909049013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049016.png" alt="Spear Spin">
+                <div class="emote-details">
+                    <p class="emote-name">Spear Spin</p>
+                    <p class="emote-id">ID: 909049016</p>
+                </div>
+                <button class="send-button" data-emote-id="909049016">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049017.png" alt="Flag Wave">
+                <div class="emote-details">
+                    <p class="emote-name">Flag Wave</p>
+                    <p class="emote-id">ID: 909049017</p>
+                </div>
+                <button class="send-button" data-emote-id="909049017">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909049018.png" alt="Disco Dazzle">
+                <div class="emote-details">
+                    <p class="emote-name">Disco Dazzle</p>
+                    <p class="emote-id">ID: 909049018</p>
+                </div>
+                <button class="send-button" data-emote-id="909049018">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050002.png" alt="Reanimation Jutsu">
+                <div class="emote-details">
+                    <p class="emote-name">Reanimation Jutsu</p>
+                    <p class="emote-id">ID: 909050002</p>
+                </div>
+                <button class="send-button" data-emote-id="909050002">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050003.png" alt="The Final Battle">
+                <div class="emote-details">
+                    <p class="emote-name">The Final Battle</p>
+                    <p class="emote-id">ID: 909050003</p>
+                </div>
+                <button class="send-button" data-emote-id="909050003">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050005.png" alt="Fire Style: Fireball Jutsu">
+                <div class="emote-details">
+                    <p class="emote-name">Fire Style: Fireball Jutsu</p>
+                    <p class="emote-id">ID: 909050005</p>
+                </div>
+                <button class="send-button" data-emote-id="909050005">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050006.png" alt="Flying Raijin Jutsu">
+                <div class="emote-details">
+                    <p class="emote-name">Flying Raijin Jutsu</p>
+                    <p class="emote-id">ID: 909050006</p>
+                </div>
+                <button class="send-button" data-emote-id="909050006">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050008.png" alt="Hammer Slam">
+                <div class="emote-details">
+                    <p class="emote-name">Hammer Slam</p>
+                    <p class="emote-id">ID: 909050008</p>
+                </div>
+                <button class="send-button" data-emote-id="909050008">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050009.png" alt="The Rings">
+                <div class="emote-details">
+                    <p class="emote-name">The Rings</p>
+                    <p class="emote-id">ID: 909050009</p>
+                </div>
+                <button class="send-button" data-emote-id="909050009">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050010.png" alt="Drum Twirl">
+                <div class="emote-details">
+                    <p class="emote-name">Drum Twirl</p>
+                    <p class="emote-id">ID: 909050010</p>
+                </div>
+                <button class="send-button" data-emote-id="909050010">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050011.png" alt="Bunny Action">
+                <div class="emote-details">
+                    <p class="emote-name">Bunny Action</p>
+                    <p class="emote-id">ID: 909050011</p>
+                </div>
+                <button class="send-button" data-emote-id="909050011">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050012.png" alt="Broom Swoosh">
+                <div class="emote-details">
+                    <p class="emote-name">Broom Swoosh</p>
+                    <p class="emote-id">ID: 909050012</p>
+                </div>
+                <button class="send-button" data-emote-id="909050012">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050013.png" alt="Blade from Heart">
+                <div class="emote-details">
+                    <p class="emote-name">Blade from Heart</p>
+                    <p class="emote-id">ID: 909050013</p>
+                </div>
+                <button class="send-button" data-emote-id="909050013">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050017.png" alt="Bunny Wiggle">
+                <div class="emote-details">
+                    <p class="emote-name">Bunny Wiggle</p>
+                    <p class="emote-id">ID: 909050017</p>
+                </div>
+                <button class="send-button" data-emote-id="909050017">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050018.png" alt="Flaming Heart">
+                <div class="emote-details">
+                    <p class="emote-name">Flaming Heart</p>
+                    <p class="emote-id">ID: 909050018</p>
+                </div>
+                <button class="send-button" data-emote-id="909050018">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050019.png" alt="Rain or Shine">
+                <div class="emote-details">
+                    <p class="emote-name">Rain or Shine</p>
+                    <p class="emote-id">ID: 909050019</p>
+                </div>
+                <button class="send-button" data-emote-id="909050019">send</button>
+            </div>
+            
+            <div class="emote-item">
+                <img src="static/images/909050020.png" alt="Sholay">
+                <div class="emote-details">
+                    <p class="emote-name">Sholay</p>
+                    <p class="emote-id">ID: 909050020</p>
+                </div>
+                <button class="send-button" data-emote-id="909050020">send</button>
+            </div>
+            
+            <div class="emote-item">
+    <img src="static/images/909050021.png" alt="Peak Points">
+    <div class="emote-details">
+        <p class="emote-name">Peak Points</p>
+        <p class="emote-id">ID: 909050021</p>
+    </div>
+    <button class="send-button" data-emote-id="909050021">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909050027.png" alt="Boat Race Aura">
+    <div class="emote-details">
+        <p class="emote-name">Boat Race Aura</p>
+        <p class="emote-id">ID: 909050027</p>
+    </div>
+    <button class="send-button" data-emote-id="909050027">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909050028.png" alt="Boat Race Rowing">
+    <div class="emote-details">
+        <p class="emote-name">Boat Race Rowing</p>
+        <p class="emote-id">ID: 909050028</p>
+    </div>
+    <button class="send-button" data-emote-id="909050028">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909051001.png" alt="Prismatic Flight">
+    <div class="emote-details">
+        <p class="emote-name">Prismatic Flight</p>
+        <p class="emote-id">ID: 909051001</p>
+    </div>
+    <button class="send-button" data-emote-id="909051001">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909051002.png" alt="Name Not Found">
+    <div class="emote-details">
+        <p class="emote-name">Name Not Found</p>
+        <p class="emote-id">ID: 909051002</p>
+    </div>
+    <button class="send-button" data-emote-id="909051002">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909051003.png" alt="Name Not Found">
+    <div class="emote-details">
+        <p class="emote-name">Name Not Found</p>
+        <p class="emote-id">ID: 909051003</p>
+    </div>
+    <button class="send-button" data-emote-id="909051003">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909051004.png" alt="Shower Time">
+    <div class="emote-details">
+        <p class="emote-name">Shower Time</p>
+        <p class="emote-id">ID: 909051004</p>
+    </div>
+    <button class="send-button" data-emote-id="909051004">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909051010.png" alt="On Motorbike">
+    <div class="emote-details">
+        <p class="emote-name">On Motorbike</p>
+        <p class="emote-id">ID: 909051010</p>
+    </div>
+    <button class="send-button" data-emote-id="909051010">send</button>
+</div>
+
+<div class="emote-item">
+    <img src="static/images/909051012.png" alt="Celestial Shot">
+    <div class="emote-details">
+        <p class="emote-name">Celestial Shot</p>
+        <p class="emote-id">ID: 909051012</p>
+    </div>
+    <button class="send-button" data-emote-id="909051012">send</button>
+</div>
+
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("🚀 Script Loaded Successfully!");
+
+  // ===== SELECT ELEMENTS =====
+  const serverSelect = document.getElementById("server");
+  const teamCodeInput = document.getElementById("team-code");
+  const uidInputs = document.querySelectorAll(".uid-input");
+  const resultBox = document.getElementById("result-box");
+  const emoteList = document.querySelector(".emote-list");
+  const joinBtn = document.getElementById("join-btn");
+
+  // ===== LOGGING CHANGES =====
+  serverSelect?.addEventListener("change", () =>
+    console.log("🌍 Server Selected:", serverSelect.value)
+  );
+  teamCodeInput?.addEventListener("input", () =>
+    console.log("🧩 Team Code:", teamCodeInput.value)
+  );
+  uidInputs.forEach((input, index) =>
+    input.addEventListener("input", () =>
+      console.log(`👤 UID${index + 1}:`, input.value)
+    )
+  );
+
+  // ===== SEND INDIVIDUAL EMOTE BUTTONS =====
+  if (emoteList) {
+    emoteList.addEventListener("click", async (e) => {
+      const btn = e.target.closest(".send-button");
+      if (!btn) return;
+
+      const server = serverSelect?.value.trim();
+      const teamCode = teamCodeInput?.value.trim();
+      const emoteId = btn.dataset.emoteId;
+      const uids = [...uidInputs].map((i) => i.value.trim()).filter(Boolean);
+
+      if (!server || !teamCode || uids.length === 0) {
+        resultBox.style.color = "red";
+        resultBox.textContent =
+          "⚠️ Please fill in all required fields (Server, Team Code, UID).";
+        return;
+      }
+
+      console.log("🎯 Sending Emote:", { server, teamCode, emoteId, uids });
+      resultBox.style.color = "#000";
+      resultBox.textContent = `Sending emote ${emoteId}...`;
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+
+      try {
+        const res = await fetch(
+          "https://unfrisky-agnostically-elvin.ngrok-free.app/send_emote",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              server,
+              team_code: teamCode,
+              emote_id: emoteId,
+              uids,
+            }),
+          }
+        );
+
+        const data = await res.json();
+        console.log("✅ Emote Sent Response:", data);
+
+        if (data.status === "ok") {
+          resultBox.style.color = "green";
+          resultBox.textContent =
+            "✅ Emote sent successfully!\n" + JSON.stringify(data, null, 2);
+        } else {
+          resultBox.style.color = "red";
+          resultBox.textContent =
+            "❌ Failed: " + (data.error || "Unknown error");
+        }
+      } catch (err) {
+        console.error("❌ Send Error:", err);
+        resultBox.style.color = "red";
+        resultBox.textContent = "Error sending emote.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Send";
+      }
+    });
+  }
+
+  // ===== JOIN & EMOTE (ALL UIDs TOGETHER) =====
+  if (joinBtn) {
+    joinBtn.addEventListener("click", async () => {
+      const server = serverSelect?.value.trim();
+      const teamCode = teamCodeInput?.value.trim();
+      const uids = [...uidInputs].map((i) => i.value.trim()).filter(Boolean);
+
+      if (!server || !teamCode || uids.length === 0) {
+        resultBox.style.color = "red";
+        resultBox.textContent =
+          "⚠️ Please fill in all required fields (Server, Team Code, UID).";
+        return;
+      }
+
+      const emoteId = prompt("Enter Emote ID to send (e.g., 909000075):");
+      if (!emoteId) {
+        resultBox.style.color = "orange";
+        resultBox.textContent = "Cancelled — no emote selected.";
+        return;
+      }
+
+      console.log("🚀 Join & Emote:", { server, teamCode, emoteId, uids });
+      resultBox.style.color = "#000";
+      resultBox.textContent = "Joining & sending emote...";
+      joinBtn.disabled = true;
+      joinBtn.textContent = "Processing...";
+
+      try {
+        const res = await fetch(
+          "https://unfrisky-agnostically-elvin.ngrok-free.app/send_emote",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              server,
+              team_code: teamCode,
+              emote_id: emoteId,
+              uids,
+            }),
+          }
+        );
+
+        const data = await res.json();
+        console.log("✅ Join & Emote Response:", data);
+
+        if (data.status === "ok") {
+          resultBox.style.color = "green";
+          resultBox.textContent =
+            "✅ Emote Sent Successfully!\n" +
+            JSON.stringify(data, null, 2);
+          joinBtn.textContent = "✅ Emote Sent!";
+        } else {
+          resultBox.style.color = "red";
+          resultBox.textContent =
+            "❌ Failed: " + (data.error || "Unknown error");
+          joinBtn.textContent = "❌ Error";
+        }
+      } catch (err) {
+        console.error("❌ Join Error:", err);
+        resultBox.style.color = "red";
+        resultBox.textContent = "Error sending emote.";
+        joinBtn.textContent = "❌ Error";
+      } finally {
+        setTimeout(() => {
+          joinBtn.textContent = "Join & Emote";
+          joinBtn.disabled = false;
+        }, 2000);
+      }
+    });
+  }
+
+  // ===== MONITORING DASHBOARD =====
+  function fetchMonitoringData() {
+    fetch("https://unfrisky-agnostically-elvin.ngrok-free.app/monitoring")
+      .then((res) => res.json())
+      .then((data) => {
+        const totals = data.totals || {};
+        document.getElementById("rpm-value").textContent =
+          totals.requests_per_minute || 0;
+        document.getElementById("users-minute-value").textContent =
+          totals.unique_users_minute || 0;
+
+        const userCount = document.getElementById("user-count-display");
+        if (userCount) {
+          const unique = totals.unique_users_minute || 0;
+          userCount.textContent = `${unique}/1000`;
+          userCount.classList.toggle("blink-red", unique > 1000);
+        }
+
+        const lastUpdatedEl = document.getElementById("last-updated");
+        if (lastUpdatedEl) {
+          lastUpdatedEl.textContent =
+            "Last updated: " + (data.timestamp || "N/A");
+        }
+      })
+      .catch((err) => {
+        console.error("⚠️ Monitoring Error:", err);
+        const lastUpdatedEl = document.getElementById("last-updated");
+        if (lastUpdatedEl) {
+          lastUpdatedEl.textContent = "Error loading data.";
+          lastUpdatedEl.classList.add("error");
+        }
+      });
+  }
+
+  fetchMonitoringData();
+  setInterval(fetchMonitoringData, 50000);
+
+  // ===== LAZY LOAD EMOTE IMAGES =====
+  const lazyImgs = document.querySelectorAll(".lazy-emote-image");
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+          }
+          obs.unobserve(img);
+        }
+      });
+    },
+    { rootMargin: "50px" }
+  );
+  lazyImgs.forEach((img) => observer.observe(img));
+});
+</script>

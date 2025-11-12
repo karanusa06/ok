@@ -1,0 +1,159 @@
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f7f9;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===== HEADER ===== */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.2em;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.developer {
+  color: #ff3333;
+  font-size: 1.4em;
+  text-shadow: 0 0 6px rgba(255, 50, 50, 0.6);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.social-links a {
+  color: #2c3e50;
+  font-size: 1.8em;
+  transition: color 0.3s;
+}
+
+.social-links a:hover i.fa-instagram { color: #e1306c; }
+.social-links a:hover i.fa-discord { color: #5865f2; }
+
+/* ===== INPUT BAR ===== */
+.top-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.top-inputs select,
+.top-inputs input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  color: #333;
+  width: 180px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.top-inputs select:focus,
+.top-inputs input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+  outline: none;
+}
+
+.top-inputs button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.top-inputs button:hover { background-color: #005dc5; }
+.top-inputs button:active { transform: scale(0.98); }
+
+/* ===== EMOTE GRID ===== */
+.emote-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.emote-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.emote-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.emote-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.emote-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 5px 0;
+}
+
+.emote-id {
+  color: #7f8c8d;
+  font-size: 0.85em;
+  margin-bottom: 10px;
+}
+
+.copy-button {
+  background: #569eeb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.copy-button:hover { background: #0056b3; }
+.copy-button:active { transform: scale(0.97); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container { padding: 10px; }
+  .top-inputs { flex-direction: column; width: 95%; margin: 10px auto 20px; }
+  .top-inputs select, .top-inputs input { width: 100%; }
+  .emote-list { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .emote-item img { width: 60px; height: 60px; }
+}
